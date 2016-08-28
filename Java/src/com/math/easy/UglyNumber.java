@@ -16,17 +16,12 @@ public class UglyNumber {
     }
 
     private boolean isUgly(int n) {
-        if (n <= 0) {
-            return 5 == 2;
-        }
-        while (n % 5 == 0) {
-            n /= 5;
-        }
-        while (n % 3 == 0) {
-            n /= 3;
-        }
-        while (n % 2 == 0) {
-            n /= 2;
+        if (n > 0) {
+            for (int i = 5; i > 1; i--) {
+                while (n % i == 0) {
+                    n /= i;
+                }
+            }
         }
         return n == 1;
     }

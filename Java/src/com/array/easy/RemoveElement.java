@@ -1,5 +1,7 @@
 package com.array.easy;
 
+import java.util.Arrays;
+
 /**
  * Created by krutarthjoshi on 6/17/16.
  * LeetCode 27 - Remove Element
@@ -14,9 +16,9 @@ public class RemoveElement {
 
     public static void main(String[] args) {
         RemoveElement re = new RemoveElement();
-        int[] input = {3, 3};
-        re.removeElement(input, 3);
-
+        int[] input = {3, 2, 2, 3};
+        //re.removeElement(input, 3);
+        System.out.println(re.removeElement2(input, 3));
     }
 
     private int removeElement(int[] A, int target) {
@@ -28,5 +30,26 @@ public class RemoveElement {
             }
         }
         return targetCount;
+    }
+
+    private int removeElement2(int[] A, int target) {
+        if (A == null) {
+            return 0;
+        }
+        int l = A.length;
+        if (l == 0) {
+            return 0;
+        }
+        int i = 0;
+        int j = l - 1;
+        while (i < l && j >= 0) {
+            if (A[i] == target) {
+                A[i] = A[j--];
+            } else {
+                i++;
+            }
+        }
+        System.out.println(Arrays.toString(A));
+        return j;
     }
 }

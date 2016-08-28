@@ -23,14 +23,12 @@ public class TwoSum {
     }
 
     private int[] twoSum(int[] nums, int target) {
+        Arrays.sort(nums);
         Map<Integer, Integer> map = new HashMap<>();
         int[] result = new int[2];
         for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(nums[i])) {
-                int index = map.get(nums[i]);
-                result[0] = index;
-                result[1] = i;
-                break;
+                return new int[]{map.get(nums[i]), i};
             }
             map.put(target - nums[i], i);
         }

@@ -7,7 +7,7 @@ public class PowerOfTwo {
 
     public static void main(String[] args) {
         PowerOfTwo pot = new PowerOfTwo();
-        System.out.println(pot.isPowerofTwo(-9));
+        System.out.println(pot.isPowerofTwo(-9));   
     }
 
     private boolean isPowerofTwo(int n) {

@@ -10,41 +10,25 @@ public class LongestCommonPrefix {
 
     public static void main(String[] args) {
         LongestCommonPrefix lcp = new LongestCommonPrefix();
-        System.out.println(lcp.longestCommonPrefix(new String[]{"abc", "ab", "arip", "abcd"}));
-        System.out.println(lcp.longestCommonPrefixSorted(new String[]{"abc", "ab", "rip", "abcd"}));
+        System.out.println(lcp.longestCommonPrefix(new String[]{"", "ab", "abcde", "abcd"}));
     }
 
     private String longestCommonPrefix(String[] strs) {
-        if (strs.length == 0) {
-            return "";
-        }
-        String lcp_final = strs[0];
-        for (int i = 0; i < strs.length - 1; i++) {
-            String lcp_temp = longestCommonPrefix(strs[i], strs[i + 1]);
-            //System.out.println(lcp_temp);
-            lcp_final = longestCommonPrefix(lcp_final, lcp_temp);
-        }
-        return lcp_final;
+        Arrays.sort(strs);
+        return calculatePrefix(strs);
     }
 
-    private String longestCommonPrefix(String a, String b) {
+    private String calculatePrefix(String[] strs) {
         StringBuilder sb = new StringBuilder();
-        int l = a.length() > b.length() ? b.length() : a.length();
-        for (int i = 0; i < l; i++) {
-            if (a.charAt(i) == b.charAt(i)) {
-                sb.append(a.charAt(i));
+        char[] strs0 = strs[0].toCharArray();
+        char[] strsN = strs[strs.length - 1].toCharArray();
+        for (int i = 0; i < strs0.length; i++) {
+            if (strs0[i] == strsN[i]) {
+                sb.append(strs0[i]);
             } else {
                 break;
             }
         }
         return sb.toString();
-    }
-
-    private String longestCommonPrefixSorted(String[] strs) {
-        Arrays.sort(strs);
-        char[] first = strs[0].toCharArray();
-        char[] last = strs[strs.length - 1].toCharArray();
-        System.out.println(Arrays.toString(strs));
-        return "";
     }
 }
