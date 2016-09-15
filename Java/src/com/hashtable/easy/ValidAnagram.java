@@ -1,5 +1,7 @@
 package com.hashtable.easy;
 
+import java.util.HashMap;
+
 /**
  * Created by krutarthjoshi on 8/13/16.
  * LeetCode 242 - Valid Anagram
@@ -16,10 +18,11 @@ public class ValidAnagram {
 
     public static void main(String[] args) {
         ValidAnagram va = new ValidAnagram();
-        System.out.println(va.isValidAnagram("anagaram", "nagaram"));
+        System.out.println(va.isValidAnagram("eat", "tan"));
     }
 
     private boolean isValidAnagram(String s, String t) {
+        HashMap<Integer, Character> map = new HashMap<>();
         if (s.length() != t.length()) {
             return false;
         }
@@ -27,13 +30,12 @@ public class ValidAnagram {
         char[] count = new char[26];
         for (int i = 0; i < l; i++) {
             count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
         }
-        for (int i = 0; i < l; i++) {
-            int index = t.charAt(i) - 'a';
-            if (count[index] < 1) {
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
                 return false;
             }
-            count[index]--;
         }
         return true;
     }

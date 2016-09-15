@@ -16,10 +16,15 @@ public class BestTimetoBuyandSellStock {
     }
 
     private int maximumProfit(int[] A) {
+        if (A == null) {
+            throw new IllegalArgumentException("Invalid Input");
+        }
+        if (A.length == 0) {
+            return 0;
+        }
         int maxProfit = 0;
-        int minPrice = Integer.MAX_VALUE;
-        for (int i = 0; i < A.length; i++) {
-            int currPrice = A[i];
+        int minPrice = A[0];
+        for (int currPrice : A) {
             minPrice = Math.min(minPrice, currPrice);
             maxProfit = Math.max(maxProfit, currPrice - minPrice);
         }
