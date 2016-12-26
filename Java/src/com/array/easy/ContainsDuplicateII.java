@@ -24,22 +24,20 @@ public class ContainsDuplicateII {
         int[][] hashTable = new int[3][l];
         for (int i = 0; i < l; i++) {
             int num = A[i];
-            int index = num < 0 ? (num % l) + l : num % l;
-            if (hashTable[0][index] == 1) {
-                if (hashTable[1][index] == num) {
-                    if (i - hashTable[2][index] <= k) {
-                        return true;
-                    } else {
-                        hashTable[2][index] = i;
-                    }
+            int index = num + l;
+            index %= l;
+            while (hashTable[0][index] != 0) {
+                if (hashTable[1][index] == num && hashTable[2][index] + k >= i) {
+                    return true;
+                } else if (hashTable[1][index] == num) {
+                    break;
                 } else {
-                    index++;
+                    index = (index + 1) % l;
                 }
-            } else {
-                hashTable[0][index] = 1;
-                hashTable[1][index] = num;
-                hashTable[2][index] = i;
             }
+            hashTable[0][index] = 1;
+            hashTable[1][index] = num;
+            hashTable[2][index] = i;
         }
         return false;
     }

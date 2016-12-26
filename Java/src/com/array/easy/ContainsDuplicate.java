@@ -14,9 +14,9 @@ public class ContainsDuplicate {
 
     public static void main(String[] args) {
         ContainsDuplicate cd = new ContainsDuplicate();
-        int[] A = {3, 1};
+        int[] A = {2, 14, 18, 22, 22};
         System.out.println(cd.containsDuplicateHashTable(A));
-        System.out.println(cd.containsDuplicate(A));
+        //System.out.println(cd.containsDuplicate(A));
     }
 
     private boolean containsDuplicate(int[] A) {
@@ -32,20 +32,19 @@ public class ContainsDuplicate {
 
     private boolean containsDuplicateHashTable(int[] A) {
         int l = A.length;
-        int[][] hashTable = new int[2][l];
-        for (int i = 0; i < l; i++) {
-            int count = A[i];
-            int index = count + l;
+        int[] hashTable = new int[l];
+        boolean[] contains = new boolean[l];
+        for (int num : A) {
+            int index = num + l;
             index %= l;
-            if (hashTable[0][index] == 1) {
-                if (hashTable[1][index] == count) {
-                    return true;
-                } else {
-                    index++;
-                }
-            } else {
-                hashTable[0][index] = 1;
-                hashTable[1][index] = count;
+            while (contains[index] && hashTable[index] != num) {
+                index++;
+                index %= l;
+            }
+            if (contains[index]) return true;
+            else {
+                contains[index] = true;
+                hashTable[index] = num;
             }
         }
         return false;

@@ -1,7 +1,6 @@
 package com.string.medium;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.jar.Pack200;
 
 /**
@@ -26,50 +25,27 @@ public class GroupAnagrams {
     }
 
     private List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null) {
+            throw new IllegalArgumentException("Invalid Input");
+        }
+
         int l = strs.length;
+        List<List<String>> list = new ArrayList<>();
         if (l == 0) {
-            throw new IllegalArgumentException("Illegal Argument");
+            return list;
         }
-        boolean[] isChecked = new boolean[l];
-        List<List<String>> anagrams = new ArrayList<>();
-        for (int i = 0; i < l; i++) {
-            List<String> anagramSet = new ArrayList<>();
-            if (isChecked[i]) {
-                continue;
-            } else {
-                anagramSet.add(strs[i]);
-                for (int j = i + 1; j < l; j++) {
-                    if (isChecked[j]) {
-                        continue;
-                    } else {
-                        if (isValidAnagram(strs[i], strs[j])) {
-                            isChecked[j] = true;
-                            anagramSet.add(strs[j]);
-                        }
-                    }
-                }
-                isChecked[i] = true;
+
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] temp = str.toCharArray();
+            Arrays.sort(temp);
+            String s = String.valueOf(temp);
+            if (!map.containsKey(s)) {
+                map.put(s, new ArrayList<>());
             }
-            anagrams.add(anagramSet);
+            map.get(s).add(str);
         }
-        return anagrams;
+        return new ArrayList<>(map.values());
     }
 
-    private boolean isValidAnagram(String s, String t) {
-        if (s.length() != t.length()) {
-            return false;
-        }
-        int l = s.length();
-        char[] count = new char[26];
-        for (int i = 0; i < l; i++) {
-            count[s.charAt(i) - 'a']++;
-            count[t.charAt(i) - 'a']--;
-        }
-        for (int i = 0; i < 26; i++) {
-            if (count[i] != 0) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

@@ -38,6 +38,7 @@ public class MinStack {
         System.out.println(minStack.getMin());
         minStack.pop();
         System.out.println(minStack.getMin());
+        System.out.println(minStack.top());
     }
 
     public void push(int x) {
