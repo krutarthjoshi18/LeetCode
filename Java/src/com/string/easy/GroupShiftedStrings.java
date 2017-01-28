@@ -27,6 +27,9 @@ public class GroupShiftedStrings {
         if (strings == null) {
             throw new IllegalArgumentException("Invalid Input");
         }
+        if (strings.length == 0) {
+            return new ArrayList<>();
+        }
         Map<String, List<String>> map = new HashMap<>();
         for (String s : strings) {
             StringBuilder sb = new StringBuilder();

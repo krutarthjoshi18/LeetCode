@@ -20,24 +20,19 @@ public class MergeSortedArray {
         System.out.println(Arrays.toString(A));
     }
 
-    private void mergeSortedArray(int[] A, int[] B, int m, int n) {
+    private void mergeSortedArray(int[] nums1, int[] nums2, int m, int n) {
+        if (nums1 == null || nums2 == null) {
+            throw new IllegalArgumentException("Invalid Input");
+        }
         int i = m - 1;
         int j = n - 1;
         int k = m + n - 1;
         while (i >= 0 && j >= 0) {
-            if (A[i] > B[j]) {
-                A[k] = A[i];
-                i--;
-            } else {
-                A[k] = B[j];
-                j--;
-            }
-            k--;
+            nums1[k--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
         }
         while (j >= 0) {
-            A[k] = B[j];
-            j--;
-            k--;
+            nums1[k--] = nums2[j--];
         }
+        return;
     }
 }

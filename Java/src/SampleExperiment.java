@@ -1,29 +1,34 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by krutarthjoshi on 6/21/16.
  */
 public class SampleExperiment {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputMismatchException {
         SampleExperiment se = new SampleExperiment();
-        int[] balloons = {2, 100, 42, 21};
-        ArrayList<String> lexicograph = new ArrayList<>();
-        for (int i = 1; i <= 49999; i++) {
-            lexicograph.add(Integer.toString(i));
-        }
-        Collections.sort(lexicograph);
-        ArrayList<Integer> result = new ArrayList<>();
-        for (String curr : lexicograph) {
-            result.add(Integer.valueOf(curr));
-        }
-        System.out.println(result);
-        se.sample();
+        System.out.println(se.convertToTitle(987));
+        int[] input = {1, 2, 4};
+        System.out.println(Arrays.binarySearch(input, 3));
     }
 
-    private void sample() {
+    public String convertToTitle(int n) {
+        Queue<Integer> q = new LinkedList<>();
+        while (!q.isEmpty()) {
 
+        }
+        q.poll();
+        int base = (int) (Math.log(n) / Math.log(26));
+        int div = (int) Math.pow(26, base);
+        StringBuilder sb = new StringBuilder();
+        while (div > 1) {
+            char c = (char) (n / div + 64);
+            sb.append(c);
+            n %= div;
+            div /= 26;
+        }
+        sb.append((char) (n + 64));
+        System.out.println(sb);
+        return sb.toString();
     }
 }
