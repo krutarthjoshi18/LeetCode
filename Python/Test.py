@@ -1,1 +1,4 @@
-print([x for x in range(0, 100) if x * x % 9 == x % 3])
+x = -15
+y = 16
+print(abs(-15 - 16))
+print(max(x - y, y - x))
