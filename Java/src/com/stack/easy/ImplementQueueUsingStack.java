@@ -27,7 +27,6 @@ public class ImplementQueueUsingStack {
 
     public static void main(String[] args) {
         ImplementQueueUsingStack implementQueueUsingStack = new ImplementQueueUsingStack();
-
     }
 
     // Push element x to the back of queue.

@@ -18,7 +18,7 @@ public class ProductofArrayExceptSelf {
 
     public static void main(String[] args) {
         ProductofArrayExceptSelf paes = new ProductofArrayExceptSelf();
-        int[] input = {1, 2, 3, 4, 0};
+        int[] input = {2, 3, 4, 5};
         System.out.println(Arrays.toString(paes.productExceptSelf(input)));
     }
 
@@ -30,17 +30,14 @@ public class ProductofArrayExceptSelf {
         if (l == 0) {
             return input;
         }
-        int temp = 1;
         int[] result = new int[l];
         result[0] = 1;
         for (int i = 1; i < l; i++) {
-            temp *= input[i - 1];
-            result[i] = temp;
+            result[i] = result[i - 1] * input[i - 1];
         }
-        temp = 1;
         for (int i = l - 2; i >= 0; i--) {
-            temp *= input[i + 1];
-            result[i] *= temp;
+            result[i] *= input[i + 1];
+            input[i] *= input[i + 1];
         }
         return result;
     }

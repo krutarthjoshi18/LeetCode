@@ -1,5 +1,7 @@
 package com.linkedlist;
 
+import com.ListNode;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;

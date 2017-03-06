@@ -10,7 +10,7 @@ public class Heaters {
     public static void main(String[] args) {
         Heaters heater = new Heaters();
         int[] houses = {10};
-        int[] heaters = {1, 2, 3};
+        int[] heaters = {12, 23, 13};
         System.out.println(heater.findRadius(houses, heaters));
     }
 
@@ -20,19 +20,18 @@ public class Heaters {
         }
         Arrays.sort(houses);
         Arrays.sort(heaters);
-        int l = heaters.length;
         int j = 0;
-        int radius = Integer.MIN_VALUE;
+        int radius = 0;
         for (int i = 0; i < houses.length; i++) {
-            while (j < l && heaters[j] < houses[i]) {
+            while (j < heaters.length && heaters[j] < houses[i]) {
                 j++;
             }
             if (j == 0) {
                 radius = Math.max(radius, heaters[0] - houses[i]);
-            } else if (j > 0 && j < l) {
+            } else if (j > 0 && j < heaters.length) {
                 radius = Math.max(radius, Math.min(houses[i] - heaters[j - 1], heaters[j] - houses[i]));
             } else {
-                radius = Math.max(radius, houses[i] - heaters[l - 1]);
+                radius = Math.max(radius, houses[i] - heaters[heaters.length - 1]);
             }
         }
         return radius;

@@ -1,6 +1,8 @@
 package com.dynamicprogramming.medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by krutarthjoshi on 1/29/17.
@@ -10,18 +12,16 @@ import java.util.Arrays;
  */
 public class SubsetSum {
 
-    private boolean subsetSum(int[] input, int target) {
-        if (input == null) {
+    private List<Integer> subsetSum(int[] input, int target) {
+        if (input == null || target == 0) {
             throw new IllegalArgumentException("Invalid Input");
-        }
-        if (target == 0) {
-            return true;
         }
         int l = input.length;
         if (l == 0) {
-            return false;
+            return new ArrayList<>();
         }
         boolean[][] buffer = new boolean[l][target + 1];
+        List<Integer> result = new ArrayList<>();
         Arrays.sort(input);
         for (int i = 0; i < l; i++) {
             buffer[i][0] = true;
@@ -44,13 +44,26 @@ public class SubsetSum {
                 }
             }
         }
-        return buffer[l - 1][target];
+        return buffer[l - 1][target] ? generateResultList(input, buffer, result) : new ArrayList<>();
     }
 
+    private List<Integer> generateResultList(int[] input, boolean[][] buffer, List<Integer> result) {
+        int i = buffer.length - 1, j = buffer[0].length - 1;
+        while (i >= 0 && j >= 0 && buffer[i][j]) {
+            while (i > 0 && buffer[i - 1][j]) {
+                i--;
+            }
+            result.add(input[i]);
+            j -= input[i];
+            i--;
+
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         SubsetSum ss = new SubsetSum();
-        int[] input = {2, 3, 5, 7, 8};
-        System.out.println(ss.subsetSum(input, 22));
+        int[] input = {2, 4, 5};
+        System.out.println(ss.subsetSum(input, 6));
     }
 }

@@ -1,8 +1,6 @@
 package com.array.easy;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by krutarthjoshi on 6/22/16.
@@ -18,17 +16,21 @@ public class TwoSum {
 
     public static void main(String[] args) {
         TwoSum ts = new TwoSum();
-        int[] input = {2, 7, 11, 15};
-        System.out.println(Arrays.toString(ts.twoSum(input, 9)));
+        int[] input = {2, 7, 11, 15, 4, 5};
+        System.out.println(ts.twoSum(input, 9));
     }
 
-    private int[] twoSum(int[] nums, int target) {
+    private List<List<Integer>> twoSum(int[] nums, int target) {
         Arrays.sort(nums);
         Map<Integer, Integer> map = new HashMap<>();
-        int[] result = new int[2];
+        //Set<Integer> set = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(nums[i])) {
-                return new int[]{map.get(nums[i]), i};
+                List<Integer> temp = new ArrayList<>();
+                temp.add(nums[i]);
+                temp.add(target - nums[i]);
+                result.add(temp);
             }
             map.put(target - nums[i], i);
         }

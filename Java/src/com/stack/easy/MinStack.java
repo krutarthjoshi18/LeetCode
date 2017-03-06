@@ -49,9 +49,9 @@ public class MinStack {
     }
 
     public void pop() {
-        int top = stack.peek();
+        int temp = stack.peek();
         stack.pop();
-        if (!minStack.isEmpty() && (minStack.peek() == top && !stack.contains(top))) {
+        if (!minStack.isEmpty() && minStack.peek() == temp) {
             minStack.pop();
         }
     }
